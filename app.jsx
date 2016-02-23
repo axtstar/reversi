@@ -8,8 +8,7 @@ var yellowbase = function(_baseName, _rpt, _iwidth){
   return yellowbase.prototype.init.apply(temp, arguments);
 }
 
-class yellowbase  {
-  prop = 1;  //ok, experimental on
+yellowbase.prototype = {
   //property
   baseName:"",
   rpt:0,

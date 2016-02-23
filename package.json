@@ -2,15 +2,15 @@
   "name": "reversi",
   "version": "0.0.2",
   "devDependencies": {
-    "react": "^0.13.3",
+    "babelify": "^7.2.0",
     "browserify": "^10.2.1",
-    "babelify": "^6.1.1",
     "gulp": "^3.8.11",
-    "vinyl-source-stream": "^1.1.0",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "react": "^0.13.3",
+    "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "build": "browserify --debug --transform babelify -e -i app2.jsx --outfile reversi.js"
+    "build": "browserify --debug --transform babelify -e -i app.jsx --outfile reversi.js"
   },
   "license": "MIT"
 }

@@ -6,10 +6,10 @@ var webserver = require('gulp-webserver');
 
 gulp.task('browserify', function() {
   browserify('./app.jsx', { debug: true })
+    .transform(babelify)
     .bundle()
     .on("error", function (err) { console.log("Error : " + err.message); })
-    .pipe(babel())
-    .pipe(source('bundle.js'))
+    .pipe(source('reversi.js'))
     .pipe(gulp.dest('./'))
 });
 
