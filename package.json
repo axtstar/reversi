@@ -12,5 +12,8 @@
   "scripts": {
     "build": "browserify --debug --transform babelify -e -i app.jsx --outfile reversi.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-es2015": "^6.5.0"
+  }
 }
