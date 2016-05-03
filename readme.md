@@ -6,13 +6,11 @@ It still is weak because of Algorithm not so much considerable.
 
 #Build
 >npm install  
->npm install babel-preset-es2015 --save  
->npm install babel-preset-react --save
->babel app.jsx
+>npm run build
 
 #History
-###version 0.0.1  
-####start as simple JS project  
 ###version 0.0.2  
 ####changed to compiled JS for babel 
+###version 0.0.1  
+####start as simple JS project  
  
