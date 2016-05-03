@@ -227,7 +227,7 @@ class base {
   addTrial(_x,_y,_c){
     var ret = 0;
     if (this.getOthelloC(_x, _y)==-1){
-      var ox= othello(_x,_y,_c,this);
+      var ox= new othelloOne(_x,_y,_c,this);
       ret = this.doOthello(ox,true);
     }
     return ret;
