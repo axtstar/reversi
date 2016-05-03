@@ -1,3 +1,144 @@
+var passYou = false;
+var passCom = false;
+var myturn = 0;
+var yourColor = 0;
+var comColor = 1;
+
+$(function(){
+   var b =  yellowbase('base',8,50);
+   yourColor = 0;//Number($("input[name='c']:checked").val());
+   comColor = (yourColor + 1) % 2;
+   //初期設定
+   b.addForce(3,3,1);
+   b.addForce(4,4,1);
+   b.addForce(3,4,0);
+   b.addForce(4,3,0);
+   b.draw();
+   
+   //自分のオセロ
+   $("#base").on('myOthello', function(e,base,posX,posY,myColor,enemy){
+     setMyOthello(base,
+                  posX,
+                  posY,
+                  myColor,
+                  enemy);
+   });
+   
+   //敵オセロ
+   $("#base").on('enemyOthello', function(e,setAonce,base,myColor){
+     setTimeout(setAOnce,2000,b,comColor);
+   });
+
+   //得点    
+   $("#base").on('Score', function(e,base){
+     setScore(base);
+   });
+
+   //スタート
+   $("#start").on('click', function(){
+     $("#base").off('fire');
+     b.othellos.splice(0,b.othellos.length);
+
+     b.addForce(3,3,1);
+     b.addForce(4,4,1);
+     b.addForce(3,4,0);
+     b.addForce(4,3,0);
+     b.draw();
+
+     yourColor = Number($("input[name='c']:checked").val());
+     comColor = (yourColor + 1) % 2;
+     
+     passYou = false;
+     passCom = false;
+     myturn = 0;
+
+     if (myturn!=yourColor){
+       $("#base").trigger('enemyOthello',[setAOnce,b,comColor]);
+     }
+   });
+
+   //クリックのイベントハンドラを登録
+   $("#base").on('click', function(e){
+      var rect = $("#base").offset();
+      var x = ~~((e.pageX - rect.left) / b.iwidth);
+      var y = ~~((e.pageY - rect.top)  / b.iwidth);
+      var c = yourColor;
+      $("#base").trigger('myOthello',[b,x,y,c,comColor]);
+   });
+
+   //タッチのイベントハンドラを登録
+   $("#base").on('touchstart', function(e){
+      var rect = e.target.getBoundingClientRect();
+      var touch = e.originalEvent.touches[0];
+     
+      var x = ~~((touch.clientX - rect.left) / b.iwidth);
+      var y = ~~((touch.clientY - rect.top) / b.iwidth);
+      var c = yourColor;
+      $("#base").trigger('myOthello',[b,x,y,c,comColor]);
+   });
+});
+
+function setScore(b){
+  //得点
+  var black=b.score(yourColor);
+  var white=b.score(comColor); 
+
+  //終了判定
+  var e = b.addTrialAll(0) + b.addTrialAll(1);
+  
+  if (e==0){
+    //end
+      var res;
+      if (black > white){
+        res = "win!";
+      } else if(black==white) {
+        res = "draw";
+      } else {
+        res = "lose";
+      }
+      $("#score").val(res + " Score: " + black + ":" + white);
+  } else {
+      $("#score").val( "Score: " + black + ":" + white);
+      b.asistAll(myturn % 2);
+  }
+}
+
+function setMyOthello(b,x,y,c,comColor){
+      if (c!=(myturn % 2)){
+        return;
+      }
+      $('#tdebug').val( "");
+      var d = b.add(x,y,c);
+      if(d==0){
+        $('#tdebug').val( "You can't put it!");
+        return;
+      }
+      b.draw();
+      
+      myturn ++;
+      $("#base").trigger('Score',[b]);
+      $('#base').trigger('enemyOthello',[setAOnce,b,comColor]);
+}
+
+function setAOnce(_base,_color){
+  myturn++;
+  var e = _base.addAll2One(_color % 2);
+  if (e==0){
+    $('#tdebug').val('pass:' + _color % 2);
+    passCom =  true;
+  } else {
+    passCom =  false;
+  }
+  e = _base.addTrialAll((_color + 1) % 2);
+  if (e==0){
+    passYou = true;
+  } else {
+    passYou = false;
+  }
+  $("#base").trigger('Score',[_base]);
+}
+
+
 /////////////////////////////////////
 //オセロのマス目
 //base class
