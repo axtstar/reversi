@@ -16,7 +16,7 @@ $(function(){
    b.draw();
    
    //自分のオセロ
-   $("#base").on('myOthello', function(e,base,posX,posY,myColor,enemy){
+   $("#base").on('myOthello', (e,base,posX,posY,myColor,enemy) => {
      setMyOthello(base,
                   posX,
                   posY,
@@ -25,17 +25,17 @@ $(function(){
    });
    
    //敵オセロ
-   $("#base").on('enemyOthello', function(e,setAonce,base,myColor){
+   $("#base").on('enemyOthello', (e,setAonce,base,myColor) => {
      setTimeout(setAOnce,2000,b,comColor);
    });
 
    //得点    
-   $("#base").on('Score', function(e,base){
+   $("#base").on('Score', (e,base) => {
      setScore(base);
    });
 
    //スタート
-   $("#start").on('click', function(){
+   $("#start").on('click', () => {
      $("#base").off('fire');
      b.othellos.splice(0,b.othellos.length);
 
@@ -58,7 +58,7 @@ $(function(){
    });
 
    //クリックのイベントハンドラを登録
-   $("#base").on('click', function(e){
+   $("#base").on('click', (e) => {
       var rect = $("#base").offset();
       var x = ~~((e.pageX - rect.left) / b.iwidth);
       var y = ~~((e.pageY - rect.top)  / b.iwidth);
@@ -67,7 +67,7 @@ $(function(){
    });
 
    //タッチのイベントハンドラを登録
-   $("#base").on('touchstart', function(e){
+   $("#base").on('touchstart', (e) => {
       var rect = e.target.getBoundingClientRect();
       var touch = e.originalEvent.touches[0];
      
@@ -103,7 +103,7 @@ function setScore(b){
   }
 }
 
-function setMyOthello(b,x,y,c,comColor){
+function setMyOthello(b,x,y,c,comColor) {
       if (c!=(myturn % 2)){
         return;
       }
