@@ -4,7 +4,7 @@ var myturn = 0;
 var yourColor = 0;
 var comColor = 1;
 
-$(function(){
+$(() => {
    var b =  new base('base',8,50);
    yourColor = 0;//Number($("input[name='c']:checked").val());
    comColor = (yourColor + 1) % 2;
@@ -78,7 +78,7 @@ $(function(){
    });
 });
 
-function setScore(b){
+var setScore = (b) => {
   //得点
   var black=b.score(yourColor);
   var white=b.score(comColor); 
@@ -103,7 +103,7 @@ function setScore(b){
   }
 }
 
-function setMyOthello(b,x,y,c,comColor) {
+var setMyOthello = (b,x,y,c,comColor) => {
       if (c!=(myturn % 2)){
         return;
       }
@@ -120,7 +120,7 @@ function setMyOthello(b,x,y,c,comColor) {
       $('#base').trigger('enemyOthello',[setAOnce,b,comColor]);
 }
 
-function setAOnce(_base,_color){
+var setAOnce = (_base,_color) => {
   myturn++;
   var e = _base.addAll2One(_color % 2);
   if (e==0){
@@ -220,7 +220,7 @@ class base {
     if (this.getOthelloC(_x, _y)==-1){
       var ox= new othelloOne(_x,_y,_c,this);
       this.setOthello(ox);
-      $("#" + this.baseName).on('fire', function(){ox.draw();});
+      $("#" + this.baseName).on('fire', () => {ox.draw();});
     }
     return;
   }
@@ -239,7 +239,7 @@ class base {
       ret = this.doOthello(ox,false);
       if (ret!=0){
         this.setOthello(ox);
-        $("#" + this.baseName).on('fire', function(){ox.draw();});
+        $("#" + this.baseName).on('fire', () => {ox.draw();});
       }
     }
     return ret;
