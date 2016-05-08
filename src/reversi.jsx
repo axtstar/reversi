@@ -1,5 +1,3 @@
-var passYou = false;
-var passCom = false;
 var myturn = 0;
 var yourColor = 0;
 var comColor = 1;
@@ -25,7 +23,7 @@ $(() => {
    });
    
    //敵オセロ
-   $("#base").on('enemyOthello', (e,setAonce,base,myColor) => {
+   $("#base").on('enemyOthello', () => {
      setTimeout(setAOnce,2000,b,comColor);
    });
 
@@ -48,8 +46,6 @@ $(() => {
      yourColor = Number($("input[name='c']:checked").val());
      comColor = (yourColor + 1) % 2;
      
-     passYou = false;
-     passCom = false;
      myturn = 0;
 
      if (myturn!=yourColor){
@@ -101,7 +97,7 @@ var setScore = (b) => {
       $("#score").val( "Score: " + black + ":" + white);
       b.asistAll(myturn % 2);
   }
-}
+};
 
 var setMyOthello = (b,x,y,c,comColor) => {
       if (c!=(myturn % 2)){
@@ -118,25 +114,17 @@ var setMyOthello = (b,x,y,c,comColor) => {
       myturn ++;
       $("#base").trigger('Score',[b]);
       $('#base').trigger('enemyOthello',[setAOnce,b,comColor]);
-}
+};
 
 var setAOnce = (_base,_color) => {
   myturn++;
   var e = _base.addAll2One(_color % 2);
   if (e==0){
     $('#tdebug').val('pass:' + _color % 2);
-    passCom =  true;
-  } else {
-    passCom =  false;
   }
   e = _base.addTrialAll((_color + 1) % 2);
-  if (e==0){
-    passYou = true;
-  } else {
-    passYou = false;
-  }
   $("#base").trigger('Score',[_base]);
-}
+};
 
 /////////////////////////////////////
 //オセロのマス目
