@@ -1,35 +1,148 @@
+var myturn = 0;
+var yourColor = 0;
+var comColor = 1;
+
+$(() => {
+  //マス目の数 
+   let _len = 8;
+   var b =  new base('base',_len);
+   yourColor = 0;//Number($("input[name='c']:checked").val());
+   comColor = (yourColor + 1) % 2;
+   //初期設定(真ん中に配置)
+   b.addForce(_len / 2 - 1,_len / 2 - 1, 1);
+   b.addForce(_len / 2, _len / 2, 1);
+   b.addForce(_len / 2 - 1, _len / 2, 0);
+   b.addForce(_len / 2,_len / 2 - 1, 0);
+   b.draw();
+   
+   //自分のオセロ
+   $("#base").on('myOthello', (e,base,posX,posY,myColor,enemy) => {
+     setMyOthello(base,
+                  posX,
+                  posY,
+                  myColor,
+                  enemy);
+   });
+   
+   //敵オセロ
+   $("#base").on('enemyOthello', () => {
+     setTimeout(setAOnce,2000,b,comColor);
+   });
+
+   //得点    
+   $("#base").on('Score', (e,base) => {
+     setScore(base);
+   });
+
+   //スタート
+   $("#start").on('click', () => {
+     $("#base").off('fire');
+     b.othellos.splice(0,b.othellos.length);
+
+     b.addForce(_len / 2 - 1,_len / 2 - 1, 1);
+     b.addForce(_len / 2, _len / 2, 1);
+     b.addForce(_len / 2 - 1, _len / 2, 0);
+     b.addForce(_len / 2,_len / 2 - 1, 0);
+     b.draw();
+
+     yourColor = Number($("input[name='c']:checked").val());
+     comColor = (yourColor + 1) % 2;
+     
+     myturn = 0;
+
+     if (myturn!=yourColor){
+       $("#base").trigger('enemyOthello',[setAOnce,b,comColor]);
+     }
+   });
+
+   //クリックのイベントハンドラを登録
+   $("#base").on('click', (e) => {
+      var rect = $("#base").offset();
+      var x = ~~((e.pageX - rect.left) / b.iwidth);
+      var y = ~~((e.pageY - rect.top)  / b.iwidth);
+      var c = yourColor;
+      $("#base").trigger('myOthello',[b,x,y,c,comColor]);
+   });
+
+   //タッチのイベントハンドラを登録
+   $("#base").on('touchstart', (e) => {
+      var rect = e.target.getBoundingClientRect();
+      var touch = e.originalEvent.touches[0];
+     
+      var x = ~~((touch.clientX - rect.left) / b.iwidth);
+      var y = ~~((touch.clientY - rect.top) / b.iwidth);
+      var c = yourColor;
+      $("#base").trigger('myOthello',[b,x,y,c,comColor]);
+   });
+});
+
+var setScore = (b) => {
+  //得点
+  var black=b.score(yourColor);
+  var white=b.score(comColor); 
+
+  //終了判定
+  var e = b.addTrialAll(0) + b.addTrialAll(1);
+  
+  if (e==0){
+    //end
+      var res;
+      if (black > white){
+        res = "win!";
+      } else if(black==white) {
+        res = "draw";
+      } else {
+        res = "lose";
+      }
+      $("#score").val(res + " Score: " + black + ":" + white);
+  } else {
+      $("#score").val( "Score: " + black + ":" + white);
+      b.asistAll(myturn % 2);
+  }
+};
+
+var setMyOthello = (b,x,y,c,comColor) => {
+      if (c!=(myturn % 2)){
+        return;
+      }
+      $('#tdebug').val( "");
+      var d = b.add(x,y,c);
+      if(d==0){
+        $('#tdebug').val( "You can't put it!");
+        return;
+      }
+      b.draw();
+      
+      myturn ++;
+      $("#base").trigger('Score',[b]);
+      $('#base').trigger('enemyOthello',[setAOnce,b,comColor]);
+};
+
+var setAOnce = (_base,_color) => {
+  myturn++;
+  var e = _base.addAll2One(_color % 2);
+  if (e==0){
+    $('#tdebug').val('pass:' + _color % 2);
+  }
+  e = _base.addTrialAll((_color + 1) % 2);
+  $("#base").trigger('Score',[_base]);
+};
+
 /////////////////////////////////////
 //オセロのマス目
 //base class
 /////////////////////////////////////
-var yellowbase = function(_baseName, _rpt, _iwidth){
-  var temp=new yellowbase.prototype.create();
-  // 引数を渡してinit関数を呼び出す
-  return yellowbase.prototype.init.apply(temp, arguments);
-}
-
-yellowbase.prototype = {
-  //property
-  baseName:"",
-  rpt:0,
-  iwidth:0,
-  canvas:null,
-  context:null,
-  othellos : null,
-  //function
-  create:function(){
-    return this;
-  },
-  init:function( _baseName ,_rpt,_iwidth){
+class base {
+  constructor(_baseName, _rpt){
     this.baseName= _baseName;
     this.rpt=_rpt;
-    this.iwidth=_iwidth;
     this.canvas=document.getElementById(this.baseName);
-    this.context=this.canvas.getContext('2d');
+    this.iwidth = (this.canvas.width - 1) / _rpt;
+    this.context = this.canvas.getContext('2d');
     this.othellos = [];
     return this;
-  },
-  addAll2One : function(c){
+  }
+  addAll2One(c){
     var ts = {};
     for(var x=0; x < this.rpt ; x++){
       for(var y=0; y < this.rpt ; y++){
@@ -58,21 +171,21 @@ yellowbase.prototype = {
     ret = this.add(xx,yy,c);
     this.draw();
     return ret;
-  },
-  asistAll : function (c){
+  }
+  asistAll (c){
     var ret = 0;
     for(var x=0; x < this.rpt ; x++){
       for(var y=0; y < this.rpt ; y++){
         var e = this.addTrial(x,y,c);
         if (e > 0){
-          var a = othello(x,y,c,this);
+          var a = new othelloOne(x,y,c,this);
           a.drawSmall();
         }
       }
     }
     return ret;
-  },
-  addTrialAll : function (c){
+  }
+  addTrialAll (c){
     var ret = 0;
     for(var x=0; x < this.rpt ; x++){
       for(var y=0; y < this.rpt ; y++){
@@ -81,8 +194,8 @@ yellowbase.prototype = {
       }
     }
     return ret;
-  },
-  score : function(_sbt){
+  }
+  score(_sbt){
     var ret = 0;
     for(var i=0; i < this.othellos.length ; i++){
       var cell =  this.othellos[i];
@@ -91,40 +204,40 @@ yellowbase.prototype = {
       }    
     }
     return ret;
-  },
-  addForce:function(_x,_y,_c){
+  }
+  addForce(_x,_y,_c){
     if (this.getOthelloC(_x, _y)==-1){
-      var ox= othello(_x,_y,_c,this);
+      var ox= new othelloOne(_x,_y,_c,this);
       this.setOthello(ox);
-      $("#" + this.baseName).on('fire', function(){ox.draw();});
+      $("#" + this.baseName).on('fire', () => {ox.draw();});
     }
     return;
-  },
-  addTrial:function(_x,_y,_c){
+  }
+  addTrial(_x,_y,_c){
     var ret = 0;
     if (this.getOthelloC(_x, _y)==-1){
-      var ox= othello(_x,_y,_c,this);
+      var ox= new othelloOne(_x,_y,_c,this);
       ret = this.doOthello(ox,true);
     }
     return ret;
-  },
-  add:function(_x,_y,_c){
+  }
+  add(_x,_y,_c){
     var ret = 0;
     if (this.getOthelloC(_x, _y)==-1){
-      var ox= othello(_x,_y,_c,this);
+      var ox= new othelloOne(_x,_y,_c,this);
       ret = this.doOthello(ox,false);
       if (ret!=0){
         this.setOthello(ox);
-        $("#" + this.baseName).on('fire', function(){ox.draw();});
+        $("#" + this.baseName).on('fire', () => {ox.draw();});
       }
     }
     return ret;
-  },
-  setOthello:function(_othello){
+  }
+  setOthello(_othello){
     this.othellos.push(_othello);
     return;
-  },
-  getOthello:function(_x,_y){
+  }
+  getOthello(_x,_y){
     for (var i=0;i<this.othellos.length;i++){
       var e = this.othellos[i];
       if (e.posX == _x && e.posY==_y){
@@ -132,14 +245,14 @@ yellowbase.prototype = {
       }
     }
     return null;
-  },
-  getOthelloC:function(_x,_y){
+  }
+  getOthelloC(_x,_y){
     if (this.getOthello(_x,_y)==null){
       return -1;
     }
     return this.getOthello(_x,_y).sbt; 
-  },
-  doOthello:function(_othello,_trial){
+  }
+  doOthello(_othello,_trial){
     var ret = 0;
     ret += this.doOthelloDetail(_othello,0,_trial);
     ret += this.doOthelloDetail(_othello,1,_trial);
@@ -151,8 +264,8 @@ yellowbase.prototype = {
     ret += this.doOthelloDetail(_othello,7,_trial);
     
     return ret;
-  },
-  doOthelloBit:function(_x,_y,_dim,_num){
+  }
+  doOthelloBit(_x,_y,_dim,_num){
     switch(_num){
       case 0:
         _x[_dim]++;
@@ -184,8 +297,8 @@ yellowbase.prototype = {
         break;
     }
     return;
-  },
-  doOthelloDetail:function(_othello,_num,_trial){
+  }
+  doOthelloDetail(_othello,_num,_trial){
     var ret = 0;
     
     //
@@ -242,9 +355,9 @@ yellowbase.prototype = {
     }
     
     return ret;
-  },
+  }
   // オセロの描画を行う
-  draw:function(){
+  draw(){
     for (var x=0; x < this.rpt ; x++)
     {
        for (var y=0; y < this.rpt ; y++)
@@ -259,38 +372,24 @@ yellowbase.prototype = {
   }
 }
 
-yellowbase.prototype.create.prototype=yellowbase.prototype;
-
 /////////////////////////////////////
 //オセロ一個
 /////////////////////////////////////
-var othello = function(_x, _y, _sbt,_base){
-  var temp = new othello.prototype.create();
-  return othello.prototype.init.apply(temp, arguments);
-}
-
-othello.prototype = {
-  //property
-  posX: -1,
-  posY: -1,
-  sbt: -1,
-  parent : null,
-  create : function(){
-   return this;
-  },
-  init : function(_x, _y, _sbt,_base){
+class othelloOne {
+  constructor(_x, _y, _sbt,_base){
+    //property
     this.posX  = _x;
     this.posY  = _y;
     this.sbt = _sbt;
     this.parent = _base;
     return this;
-  },
-  clear : function(){
+  }
+  clear(){
     this.posX = -1;
     this.posY = -1;
     this.sbt = -1;
-  },
-  draw : function(){
+  }
+  draw(){
      //drawing othello
      var xx = this.parent.iwidth / 2;
      
@@ -300,8 +399,8 @@ othello.prototype = {
      this.parent.context.fillStyle = fillColor;
      this.parent.context.arc(this.posX * this.parent.iwidth + xx, this.posY * this.parent.iwidth + xx, xx - 2, 0 , Math.PI * 2, false);
      this.parent.context.fill();
-  },
-  drawSmall : function(){
+  }
+  drawSmall(){
      var xx = this.parent.iwidth / 2;     
      this.parent.context.beginPath();
      var strokeColor= (this.sbt==0 ? 'rgb(0,0,0)' : 'rgb(255,255,255)');
@@ -310,11 +409,3 @@ othello.prototype = {
      this.parent.context.stroke();
   }
 }
-
-othello.prototype.create.prototype=othello.prototype;
-
-
-
-
-
-
