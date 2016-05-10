@@ -3,14 +3,16 @@ var yourColor = 0;
 var comColor = 1;
 
 $(() => {
-   var b =  new base('base',8,50);
+  //マス目の数 
+   let _len = 8;
+   var b =  new base('base',_len);
    yourColor = 0;//Number($("input[name='c']:checked").val());
    comColor = (yourColor + 1) % 2;
-   //初期設定
-   b.addForce(3,3,1);
-   b.addForce(4,4,1);
-   b.addForce(3,4,0);
-   b.addForce(4,3,0);
+   //初期設定(真ん中に配置)
+   b.addForce(_len / 2 - 1,_len / 2 - 1, 1);
+   b.addForce(_len / 2, _len / 2, 1);
+   b.addForce(_len / 2 - 1, _len / 2, 0);
+   b.addForce(_len / 2,_len / 2 - 1, 0);
    b.draw();
    
    //自分のオセロ
@@ -37,10 +39,10 @@ $(() => {
      $("#base").off('fire');
      b.othellos.splice(0,b.othellos.length);
 
-     b.addForce(3,3,1);
-     b.addForce(4,4,1);
-     b.addForce(3,4,0);
-     b.addForce(4,3,0);
+     b.addForce(_len / 2 - 1,_len / 2 - 1, 1);
+     b.addForce(_len / 2, _len / 2, 1);
+     b.addForce(_len / 2 - 1, _len / 2, 0);
+     b.addForce(_len / 2,_len / 2 - 1, 0);
      b.draw();
 
      yourColor = Number($("input[name='c']:checked").val());
@@ -130,14 +132,13 @@ var setAOnce = (_base,_color) => {
 //オセロのマス目
 //base class
 /////////////////////////////////////
-
 class base {
-  constructor(_baseName, _rpt, _iwidth){
+  constructor(_baseName, _rpt){
     this.baseName= _baseName;
     this.rpt=_rpt;
-    this.iwidth=_iwidth;
     this.canvas=document.getElementById(this.baseName);
-    this.context=this.canvas.getContext('2d');
+    this.iwidth = (this.canvas.width - 1) / _rpt;
+    this.context = this.canvas.getContext('2d');
     this.othellos = [];
     return this;
   }
