@@ -3,11 +3,11 @@
 	"configurations": [
 		{
 			"name": "Launch index.html with sourcemaps",
-			"type": "chrome",
+			"type": "firefox",
 			"request": "launch",
 			"file": "${workspaceRoot}/reversi.html",
 			"sourceMaps": true,
-			"webRoot": "${workspaceRoot}"
+			"diagnosticLogging": true
 		}
 	]
 }

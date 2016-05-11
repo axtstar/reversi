@@ -1,13 +1,19 @@
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="lib/reversi.js"></script>
-
-<input type="radio" name="c" id="c" value="0" checked>黒</input>
-<input type="radio" name="c" id="c" value="1">白</input>
-<input type='text' id='score' readonly='readonly' />
-<button id="start">start</button>
-<br />
-<canvas id="base"  style="background-color:yellow;" width="401" height="401"></canvas>
-<br />
-<input type='text' id='tdebug' readonly='readonly' />
-<br />
-<!-- textarea id='area' cols='8' rows='8' style="width:300px;height:300px;"></textarea -->
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title>Reversi</title>
+ <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
+ <script type="text/javascript" src="lib/reversi.js"></script>
+ </head>
+  <body>
+    <input type="radio" name="c" id="c" value="0" checked>黒</input>
+    <input type="radio" name="c" id="c" value="1">白</input>
+    <input type='text' id='score' readonly='readonly' />
+    <button id="start">start</button>
+    <br />
+    <canvas id="base"  style="background-color:blue;" width="401" height="401"></canvas>
+    <br />
+    <input type='text' id='tdebug' readonly='readonly' />
+    <br />
+  </body>
+</html>
