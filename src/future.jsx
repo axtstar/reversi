@@ -1,9 +1,10 @@
- 
+require("babel-polyfill");
+
 var  fetchJson = async (url) => {
         try {
             let request = await fetch(url);
             let text = await request.text();
-            return JSON.parse(text);
+            return text;
         }
         catch (error) {
             console.log(`ERROR: ${error.stack}`);
@@ -11,6 +12,6 @@ var  fetchJson = async (url) => {
     };
 
 $(() => {
-   var postal = fetchJson('http://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060') 
-  $('#tdebug').val(postal);
+   var ipaddress = fetchJson('http://localhost:8080/src/sample.json') 
+   $('#tdebug').val(ipaddress)
 });
