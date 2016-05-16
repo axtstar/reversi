@@ -27,6 +27,12 @@
 			"request": "launch",
 			"file": "${workspaceRoot}/reversi.html",
 			"webRoot": "${workspaceRoot}/src/"
+		},
+		{
+			"name": "firefox",
+			"type": "firefox",
+			"request": "launch",
+			"file": "${workspaceRoot}/reversi.html"
 		}
     ]
 }
