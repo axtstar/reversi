@@ -12,7 +12,7 @@ module.exports = {
   module: {
        loaders: [ { loader: 'babel', // 'babel-loader' is also a legal name to reference
             query: {
-                presets: ['es2015', 'stage-0']
+                presets: ['es2015', 'stage-3']
             }
         }
        ]
