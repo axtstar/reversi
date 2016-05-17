@@ -34,7 +34,7 @@ var parseXml = (xml) => {
       (index,elem) => {
         var ask = $(dom).find("query").find("results").find("rate#" + elem).find("Ask").text();
         var bid = $(dom).find("query").find("results").find("rate#" + elem).find("Bid").text();
-        result += elem + ":" + ask + ":"  + bid + "\n";
+        result += `${elem}:${ask}:${bid }\n`;
       }
     )
     
