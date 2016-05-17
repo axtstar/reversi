@@ -12,6 +12,16 @@ var  fetchJson = async (url) => {
     };
 
 $(() => {
-   var ipaddress = fetchJson('http://localhost:8080/src/sample.json') 
-   $('#tdebug').val(ipaddress)
+    setInterval( () => {
+        var adresult = fetchJson('http://localhost:8080/src/sample.json');
+        adresult.then(A);
+        console.log('fetched');
+    },
+    5000,
+    null);
+   
 });
+
+var A = (a) => {
+    $('#adwork').val(a);
+}
