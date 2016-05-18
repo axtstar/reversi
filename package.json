@@ -6,7 +6,7 @@
     "eslint": "eslint src/*.*",
     "webpack": "webpack",
     "server": "node server.js",
-    "test": "mocha --compilers js:babel-core/register test/unit.js"
+    "test": "mocha --compilers js:babel-core/register test/test.html"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",
@@ -21,7 +21,8 @@
     "babel-loader":"*",
     "connect":"*",
     "serve-static":"*",
-    "chai":"*"
+    "chai":"*",
+    "jsdom":"*"
   },
   "eslintConfig": {
   "env": 

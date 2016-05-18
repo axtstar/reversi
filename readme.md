@@ -6,7 +6,7 @@ It still is weak because of Algorithm not so much considerable.
 
 #Build
 >npm install  
->npm run build
+>npm run webpack
 
 #History
 ###version 0.0.2  
