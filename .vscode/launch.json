@@ -22,24 +22,16 @@
             "outDir": "${workspaceRoot}/lib"
         },
         {
-            "name": "future",
+            "name": "run mocha",
             "type": "node",
-            "request": "launch",
-            "program": "${workspaceRoot}/src/future.jsx",
+            "program": "/usr/local/bin/mocha",
             "stopOnEntry": false,
-            "args": [],
+            "args": ["--compilers js:babel-core/register","test/unit.js"],
             "cwd": "${workspaceRoot}",
-            "preLaunchTask": null,
             "runtimeExecutable": null,
-            "runtimeArgs": [
-                "--nolazy"
-            ],
             "env": {
                 "NODE_ENV": "development"
-            },
-            "externalConsole": false,
-            "sourceMaps": true,
-            "outDir": "${workspaceRoot}/lib"
+            }
         },
 		{
 			"name": "chrome",
