@@ -8,6 +8,10 @@ describe('reversi test run', () => {
       var b = new test(100);
       assert.equal(100, b.a);
       
+      // class othelloOne
+      var o = new othelloOne(2,2,0,'base');
+      assert.equal(8,o.posX);
+      
     });
   });
 });

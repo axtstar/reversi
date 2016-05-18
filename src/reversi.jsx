@@ -6,7 +6,7 @@ $(() => {
   //マス目の数 
    let _len = 8;
    var b =  new base('base',_len);
-   yourColor = 0;//Number($("input[name='c']:checked").val());
+   yourColor = 0;
    comColor = (yourColor + 1) % 2;
    //初期設定(真ん中に配置)
    b.addForce(_len / 2 - 1,_len / 2 - 1, 1);

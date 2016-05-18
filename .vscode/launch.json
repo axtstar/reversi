@@ -22,22 +22,17 @@
             "outDir": "${workspaceRoot}/lib"
         },
         {
-            "name": "run mocha",
-            "type": "node",
-            "program": "/usr/local/bin/mocha",
-            "stopOnEntry": false,
-            "args": ["--compilers js:babel-core/register","test/unit.js"],
-            "cwd": "${workspaceRoot}",
-            "runtimeExecutable": null,
-            "env": {
-                "NODE_ENV": "development"
-            }
+			"name": "run mocha",
+			"type": "chrome",
+			"request": "launch",
+			"file": "${workspaceRoot}/reversi.html",
+			"webRoot": "${workspaceRoot}/src/"
         },
 		{
 			"name": "chrome",
 			"type": "chrome",
 			"request": "launch",
-			"file": "${workspaceRoot}/reversi.html",
+			"file": "${workspaceRoot}/test.html",
 			"webRoot": "${workspaceRoot}/src/"
 		},
 		{
