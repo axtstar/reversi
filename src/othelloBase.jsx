@@ -5,7 +5,11 @@ import {othelloOne} from "../src/othelloOne.jsx";
 //base class
 /////////////////////////////////////
 export class othelloBase {
-  constructor(_baseName, _rpt){
+  constructor(_baseName,
+                    _cssScore,
+                    _cssStar,
+                    _cssTdebug, 
+                   _rpt){
     this.baseName= _baseName;
     this.rpt=_rpt;
     this.canvas=$(this.baseName).get(0);

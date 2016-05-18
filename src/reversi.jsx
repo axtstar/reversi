@@ -8,7 +8,11 @@ var cssTdebug='#tdebug';
 $(() => {
   //マス目の数 
    let _len = 8;
-   var b =  new othelloBase(cssBase,_len);
+   var b =  new othelloBase(cssBase,
+                                            cssScore,
+                                            cssStart,
+                                            cssTdebug,
+                                            _len);
    b.yourColor = 0;
    b.comColor = (b.yourColor + 1) % 2;
    //初期設定(真ん中に配置)
