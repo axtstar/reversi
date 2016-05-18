@@ -1,7 +1,9 @@
 import {othelloBase} from "../src/othelloBase.jsx";
 
-var myturn = 0;
 var cssBase='#base';
+var cssScore='#score';
+var cssStart='#start';
+var cssTdebug='#tdebug';
 
 $(() => {
   //マス目の数 
@@ -33,7 +35,7 @@ $(() => {
    });
 
    //スタート
-   $("#start").on('click', () => {
+   $(cssStart).on('click', () => {
      $(cssBase).off('fire');
      
      b.init();
@@ -42,9 +44,9 @@ $(() => {
      b.yourColor = Number($("input[name='c']:checked").val());
      b.comColor = (b.yourColor + 1) % 2;
      
-     myturn = 0;
+     b.myTurn = 0;
 
-     if (myturn!=b.yourColor){
+     if (b.myTurn!=b.yourColor){
        $(cssBase).trigger('enemyOthello',[setAOnce,b,b.comColor]);
      }
    });
@@ -88,35 +90,35 @@ var setScore = (b) => {
       } else {
         res = "lose";
       }
-      $("#score").val(res + " Score: " + black + ":" + white);
+      $(cssScore).val(res + " Score: " + black + ":" + white);
   } else {
-      $("#score").val( "Score: " + black + ":" + white);
-      b.asistAll(myturn % 2);
+      $(cssScore).val( "Score: " + black + ":" + white);
+      b.asistAll(b.myTurn % 2);
   }
 };
 
 var setMyOthello = (b,x,y,c,comColor) => {
-      if (c!=(myturn % 2)){
+      if (c!=(b.myTurn % 2)){
         return;
       }
-      $('#tdebug').val( "");
+      $(cssTdebug).val( "");
       var d = b.add(x,y,c);
       if(d==0){
-        $('#tdebug').val( "You can't put it!");
+        $(cssTdebug).val( "You can't put it!");
         return;
       }
       b.draw();
       
-      myturn ++;
+      b.myTurn ++;
       $(cssBase).trigger('Score',[b]);
       $(cssBase).trigger('enemyOthello',[setAOnce,b,comColor]);
 };
 
 var setAOnce = (_base,_color) => {
-  myturn++;
+  _base.myTurn++;
   var e = _base.addAll2One(_color % 2);
   if (e==0){
-    $('#tdebug').val('pass:' + _color % 2);
+    $(cssTdebug).val('pass:' + _color % 2);
   }
   e = _base.addTrialAll((_color + 1) % 2);
   $(cssBase).trigger('Score',[_base]);

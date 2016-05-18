@@ -15,6 +15,7 @@ export class othelloBase {
     
     this.yourColor = 0;
     this.comColor = 0;
+    this.myTurn=0;
     
     return this;
   }
