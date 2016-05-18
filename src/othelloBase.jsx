@@ -12,16 +12,20 @@ export class othelloBase {
     this.iwidth = (this.canvas.width - 1) / _rpt;
     this.context = this.canvas.getContext('2d');
     this.othellos = [];
+    
+    this.yourColor = 0;
+    this.comColor = 0;
+    
     return this;
   }
   
   init(){
+    this.othellos.splice(0,this.othellos.length);
+
      this.addForce(this.rpt / 2 - 1,this.rpt / 2 - 1, 1);
      this.addForce(this.rpt / 2, this.rpt / 2, 1);
      this.addForce(this.rpt / 2 - 1, this.rpt / 2, 0);
      this.addForce(this.rpt / 2,this.rpt / 2 - 1, 0);
-
-    this.othellos.splice(0,this.othellos.length);
   }
   
   addAll2One(c){
@@ -192,7 +196,6 @@ export class othelloBase {
 
     //隣接しているセルが自分と同じもしくはundefの場合は何もしない
     //隣接
-    
     this.doOthelloBit(x,y,0,_num);
     if (this.getOthelloC(x[0], y[0])==-1){
       return ret;
