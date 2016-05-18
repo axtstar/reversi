@@ -7,7 +7,7 @@ var comColor = 1;
 $(() => {
   //マス目の数 
    let _len = 8;
-   var b =  new othelloBase('base',_len);
+   var b =  new othelloBase('#base',_len);
    yourColor = 0;
    comColor = (yourColor + 1) % 2;
    //初期設定(真ん中に配置)
@@ -39,12 +39,8 @@ $(() => {
    //スタート
    $("#start").on('click', () => {
      $("#base").off('fire');
-     b.othellos.splice(0,b.othellos.length);
-
-     b.addForce(_len / 2 - 1,_len / 2 - 1, 1);
-     b.addForce(_len / 2, _len / 2, 1);
-     b.addForce(_len / 2 - 1, _len / 2, 0);
-     b.addForce(_len / 2,_len / 2 - 1, 0);
+     
+     b.init();
      b.draw();
 
      yourColor = Number($("input[name='c']:checked").val());

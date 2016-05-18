@@ -8,12 +8,22 @@ export class othelloBase {
   constructor(_baseName, _rpt){
     this.baseName= _baseName;
     this.rpt=_rpt;
-    this.canvas=document.getElementById(this.baseName);
+    this.canvas=$(this.baseName).get(0);
     this.iwidth = (this.canvas.width - 1) / _rpt;
     this.context = this.canvas.getContext('2d');
     this.othellos = [];
     return this;
   }
+  
+  init(){
+     this.addForce(this.rpt / 2 - 1,this.rpt / 2 - 1, 1);
+     this.addForce(this.rpt / 2, this.rpt / 2, 1);
+     this.addForce(this.rpt / 2 - 1, this.rpt / 2, 0);
+     this.addForce(this.rpt / 2,this.rpt / 2 - 1, 0);
+
+    this.othellos.splice(0,this.othellos.length);
+  }
+  
   addAll2One(c){
     var ts = {};
     for(var x=0; x < this.rpt ; x++){
@@ -81,7 +91,7 @@ export class othelloBase {
     if (this.getOthelloC(_x, _y)==-1){
       var ox= new othelloOne(_x,_y,_c,this);
       this.setOthello(ox);
-      $("#" + this.baseName).on('fire', () => {ox.draw();});
+      $(this.baseName).on('fire', () => {ox.draw();});
     }
     return;
   }
@@ -100,7 +110,7 @@ export class othelloBase {
       ret = this.doOthello(ox,false);
       if (ret!=0){
         this.setOthello(ox);
-        $("#" + this.baseName).on('fire', () => {ox.draw();});
+        $(this.baseName).on('fire', () => {ox.draw();});
       }
     }
     return ret;
@@ -240,6 +250,6 @@ export class othelloBase {
             this.context.strokeRect(x * this.iwidth, y * this.iwidth ,this.iwidth,this.iwidth); 
        }
     }
-    $("#" + this.baseName).trigger('fire');
+    $(this.baseName).trigger('fire');
   }
 }
