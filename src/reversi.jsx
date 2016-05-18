@@ -13,8 +13,6 @@ $(() => {
                                             cssStart,
                                             cssTdebug,
                                             _len);
-   b.yourColor = 0;
-   b.comColor = (b.yourColor + 1) % 2;
    //初期設定(真ん中に配置)
    b.init();
    b.draw();

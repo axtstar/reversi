@@ -5,12 +5,12 @@ import {othelloOne} from "../src/othelloOne.jsx";
 //base class
 /////////////////////////////////////
 export class othelloBase {
-  constructor(_baseName,
+  constructor(_cssBase,
                     _cssScore,
                     _cssStar,
                     _cssTdebug, 
                    _rpt){
-    this.baseName= _baseName;
+    this.baseName= _cssBase;
     this.rpt=_rpt;
     this.canvas=$(this.baseName).get(0);
     this.iwidth = (this.canvas.width - 1) / _rpt;
@@ -18,7 +18,7 @@ export class othelloBase {
     this.othellos = [];
     
     this.yourColor = 0;
-    this.comColor = 0;
+    this.comColor = 1;
     this.myTurn=0;
     
     return this;
