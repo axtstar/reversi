@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import {othelloOne} from "../src/othelloOne.jsx";
 
 var assert = require('chai').assert;
 describe('reversi test run', () => {
@@ -10,7 +11,7 @@ describe('reversi test run', () => {
       
       // class othelloOne
       var o = new othelloOne(2,2,0,'base');
-      assert.equal(8,o.posX);
+      assert.equal(2,o.posX);
       
     });
   });

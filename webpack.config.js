@@ -1,9 +1,9 @@
 // webpack.config.js
 module.exports = {
   entry: {
-      reversi: './src/reversi.jsx',
-      future: './src/future.jsx',
-      unit:'./src/unit.jsx'
+      reversi: ['./src/reversi.jsx'],
+      future: ['./src/future.jsx'],
+      unit:['./src/unit.jsx']
   },
   output: {
     path: './lib/',
@@ -11,7 +11,7 @@ module.exports = {
   },
   devtool: "source-map",
   module: {
-       loaders: [ { loader: 'babel', // 'babel-loader' is also a legal name to reference
+       loaders: [ { loader: 'babel-loader', // 'babel-loader' is also a legal name to reference
             query: {
                 presets: ['es2015', 'stage-3']
             }
