@@ -23,6 +23,7 @@ export class othelloBase {
   //initial
   // reset whole reversi cells to 0 and put 2 by 2 cells
   init(){
+     $(this.cssBase).off('fire');    
     this.othellos.splice(0,this.othellos.length);
 
      this.addForce(this.rpt / 2 - 1,this.rpt / 2 - 1, 1);

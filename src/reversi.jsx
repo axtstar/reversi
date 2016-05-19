@@ -36,7 +36,6 @@ $(() => {
 
    //スタート
    $(cssStart).on('click', () => {
-     $(cssBase).off('fire');
      
      b.init();
      b.draw();

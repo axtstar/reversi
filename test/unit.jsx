@@ -19,12 +19,13 @@ describe('reversi test run', () => {
             if (res===0){
               //end of the game
              target.init();
+             target.draw();
             }
             else{
               cnt++;
             }
           },
-          100,
+          0,
           null);
       } );
     });    
