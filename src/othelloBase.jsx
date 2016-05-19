@@ -5,11 +5,7 @@ import {othelloOne} from "../src/othelloOne.jsx";
 //base class
 /////////////////////////////////////
 export class othelloBase {
-  constructor(_cssBase,
-                    _cssScore,
-                    _cssStar,
-                    _cssTdebug, 
-                   _rpt){
+  constructor(_cssBase,  _rpt){
     this.baseName= _cssBase;
     this.rpt=_rpt;
     this.canvas=$(this.baseName).get(0);
@@ -24,6 +20,8 @@ export class othelloBase {
     return this;
   }
   
+  //initial
+  // reset whole reversi cells to 0 and put 2 by 2 cells
   init(){
     this.othellos.splice(0,this.othellos.length);
 
@@ -63,6 +61,8 @@ export class othelloBase {
     this.draw();
     return ret;
   }
+  
+  //guide circle for helpness to which location is available
   asistAll (c){
     var ret = 0;
     for(var x=0; x < this.rpt ; x++){
@@ -76,6 +76,8 @@ export class othelloBase {
     }
     return ret;
   }
+  
+  //check the available location
   addTrialAll (c){
     var ret = 0;
     for(var x=0; x < this.rpt ; x++){
@@ -86,6 +88,8 @@ export class othelloBase {
     }
     return ret;
   }
+  
+  //culculate score
   score(_sbt){
     var ret = 0;
     for(var i=0; i < this.othellos.length ; i++){
@@ -96,6 +100,8 @@ export class othelloBase {
     }
     return ret;
   }
+  
+  //force add a cell due to reset a game
   addForce(_x,_y,_c){
     if (this.getOthelloC(_x, _y)==-1){
       var ox= new othelloOne(_x,_y,_c,this);
@@ -104,6 +110,8 @@ export class othelloBase {
     }
     return;
   }
+  
+  //virtual trial put the cell
   addTrial(_x,_y,_c){
     var ret = 0;
     if (this.getOthelloC(_x, _y)==-1){
@@ -112,6 +120,8 @@ export class othelloBase {
     }
     return ret;
   }
+  
+  //actual put the cell
   add(_x,_y,_c){
     var ret = 0;
     if (this.getOthelloC(_x, _y)==-1){

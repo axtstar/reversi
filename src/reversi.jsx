@@ -4,15 +4,13 @@ var cssBase='#base';
 var cssScore='#score';
 var cssStart='#start';
 var cssTdebug='#tdebug';
+var cssCheck="input[name='c']";
+var comWait = 1;
 
 $(() => {
   //マス目の数 
    let _len = 8;
-   var b =  new othelloBase(cssBase,
-                                            cssScore,
-                                            cssStart,
-                                            cssTdebug,
-                                            _len);
+   var b =  new othelloBase(cssBase, _len);
    //初期設定(真ん中に配置)
    b.init();
    b.draw();
@@ -28,11 +26,11 @@ $(() => {
    
    //敵オセロ
    $(cssBase).on('enemyOthello', () => {
-     setTimeout(setAOnce,2000,b,b.comColor);
+     setTimeout(setAOnce, comWait, b, b.comColor);
    });
 
    //得点    
-   $(cssBase).on('Score', (e,base) => {
+   $(cssBase).on('Score', (e, base) => {
      setScore(base);
    });
 
@@ -43,7 +41,7 @@ $(() => {
      b.init();
      b.draw();
 
-     b.yourColor = Number($("input[name='c']:checked").val());
+     b.yourColor = Number($(`${cssCheck}:checked`).val());
      b.comColor = (b.yourColor + 1) % 2;
      
      b.myTurn = 0;
@@ -92,9 +90,9 @@ var setScore = (b) => {
       } else {
         res = "lose";
       }
-      $(cssScore).val(res + " Score: " + black + ":" + white);
+      $(cssScore).val(`${res} Score: ${black} : ${white}`);
   } else {
-      $(cssScore).val( "Score: " + black + ":" + white);
+      $(cssScore).val( `Score: ${black} : ${white}`);
       b.asistAll(b.myTurn % 2);
   }
 };
@@ -116,6 +114,7 @@ var setMyOthello = (b,x,y,c,comColor) => {
       $(cssBase).trigger('enemyOthello',[setAOnce,b,comColor]);
 };
 
+//
 var setAOnce = (_base,_color) => {
   _base.myTurn++;
   var e = _base.addAll2One(_color % 2);
