@@ -101,7 +101,7 @@ var setMyOthello = (b,x,y,c,comColor) => {
       if (c!=(b.myTurn % 2)){
         return;
       }
-      $(cssTdebug).val( "");
+      $(cssTdebug).val("");
       var d = b.add(x,y,c);
       if(d==0){
         $(cssTdebug).val( "You can't put it!");

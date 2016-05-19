@@ -3,7 +3,7 @@ module.exports = {
   entry: {
       reversi: ['./src/reversi.jsx'],
       future: ['./src/future.jsx'],
-      unit:['./src/unit.jsx']
+     unit: ['./test/unit.jsx']
   },
   output: {
     path: './lib/',

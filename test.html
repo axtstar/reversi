@@ -13,12 +13,24 @@
   <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
   
   <script>mocha.setup('bdd')</script>
-  <script src="lib/reversi.js"></script>
   <script src="lib/unit.js"></script>
   <script>
     mocha.checkLeaks();
     mocha.globals(['jQuery']);
     mocha.run();
   </script>
+  <div>
+      <input type="radio" name="c" id="c" value="0" checked>黒</input>
+      <input type="radio" name="c" id="c" value="1">白</input>
+      <input type='text' id='score' readonly='readonly' />
+      <button id="start">start</button>
+      <br />
+      <canvas id="base"  style="background-color:blue;" width="401" height="401"></canvas>
+      <br />
+      <input type='text' id='tdebug' readonly='readonly' />
+      <br />
+      <textarea id='adwork' style="width:400px;height:400px" cols="50" rows="10" wrap="soft"></textarea>
+      <br />
+  </div>
 </body>
 </html>
