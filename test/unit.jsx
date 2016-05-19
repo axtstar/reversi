@@ -19,7 +19,6 @@ describe('reversi test run', () => {
             if (res===0){
               //end of the game
              target.init();
-             target.myTurn = 0;
             }
             else{
               cnt++;

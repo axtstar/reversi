@@ -29,27 +29,28 @@ export class othelloBase {
      this.addForce(this.rpt / 2, this.rpt / 2, 1);
      this.addForce(this.rpt / 2 - 1, this.rpt / 2, 0);
      this.addForce(this.rpt / 2,this.rpt / 2 - 1, 0);
+     
+     this.myTurn=0;
   }
   
+  //put a cell among all posible location
   addAll2One(c){
-    var ts = {};
+    var ts = [];
+    var index=0;
+    
     for(var x=0; x < this.rpt ; x++){
       for(var y=0; y < this.rpt ; y++){
         var e = this.addTrial(x,y,c);
         if (e > 0){
-          ts[x * this.rpt + y]=e;
+          ts[index]=x * this.rpt + y;
+          index++;
         }
       }
     }
 
-    var ret = -1;
-    var m = -1;
-    for (var k in ts){
-      if (m < ts[k]){
-        ret = k;
-        m = ts[k];
-      }
-    }
+   //select random value
+   var m = Math.floor( Math.random() * (ts.length) );
+   var ret =ts[m];
   
     if (ret==-1){
       return 0;

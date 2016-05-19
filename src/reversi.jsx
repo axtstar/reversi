@@ -44,8 +44,6 @@ $(() => {
      b.yourColor = Number($(`${cssCheck}:checked`).val());
      b.comColor = (b.yourColor + 1) % 2;
      
-     b.myTurn = 0;
-
      if (b.myTurn!=b.yourColor){
        $(cssBase).trigger('enemyOthello',[setAOnce,b,b.comColor]);
      }
