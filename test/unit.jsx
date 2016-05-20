@@ -4,6 +4,12 @@ import {othelloBase} from "../src/othelloBase.jsx";
 var assert = require('chai').assert;
 describe('reversi test run', () => {
   describe('constructor()',  () => {
+    it('clear test', () => {
+      // init
+      var target = new othelloBase('#base',8);
+      target.init();
+      target.clear();      
+    });
     it('run  instantiate and two step',  () => {
       // init
       var target = new othelloBase('#base',8);
@@ -19,6 +25,7 @@ describe('reversi test run', () => {
             if (res===0){
               //end of the game
              target.init();
+             target.clear();
              target.draw();
             }
             else{
@@ -29,5 +36,5 @@ describe('reversi test run', () => {
           null);
       } );
     });    
-  });
-});
+  }); //describe
+}); //describe
