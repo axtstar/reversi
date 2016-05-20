@@ -1,6 +1,14 @@
 {
   "parser": "babel-eslint",
+  "extends": "eslint:recommended",
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jquery": true
+  },
   "rules": {
-    "strict": 0
+    "semi": 2,
+    "strict":0
   }
 }

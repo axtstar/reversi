@@ -1,0 +1,36 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="mocha"></div>
+  
+  <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.2.3/prototype.js"></script>
+  <script src="https://cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+  <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+  
+  <script>mocha.setup('bdd')</script>
+  <script src="lib/unit.js"></script>
+  <script>
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+  </script>
+  <div>
+      <input type="radio" name="c" id="c" value="0" checked>黒</input>
+      <input type="radio" name="c" id="c" value="1">白</input>
+      <input type='text' id='score' readonly='readonly' />
+      <button id="start">start</button>
+      <br />
+      <canvas id="base"  style="background-color:blue;" width="401" height="401"></canvas>
+      <br />
+      <input type='text' id='tdebug' readonly='readonly' />
+      <br />
+      <textarea id='adwork' style="width:400px;height:400px" cols="50" rows="10" wrap="soft"></textarea>
+      <br />
+  </div>
+</body>
+</html>

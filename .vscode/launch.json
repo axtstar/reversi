@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "web server",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/server.js",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "externalConsole": false,
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/lib"
+        },
+        {
+			"name": "run mocha",
+			"type": "chrome",
+			"request": "launch",
+			"file": "${workspaceRoot}/reversi.html",
+			"webRoot": "${workspaceRoot}/src/"
+        },
+		{
+			"name": "chrome",
+			"type": "chrome",
+			"request": "launch",
+			"file": "${workspaceRoot}/test.html",
+			"webRoot": "${workspaceRoot}/src/"
+		},
+		{
+			"name": "firefox",
+			"type": "firefox",
+			"request": "launch",
+			"file": "${workspaceRoot}/reversi.html"
+		}
+    ]
+}
