@@ -273,6 +273,7 @@ export class othelloBase {
   }
   
   clear(){
+    $(this.cssBase).off('fire');
     for (var x=0; x < this.rpt ; x++)
     {
        for (var y=0; y < this.rpt ; y++)
