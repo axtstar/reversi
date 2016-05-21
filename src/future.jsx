@@ -36,7 +36,7 @@ var parseXml = (xml) => {
         var bid = $(dom).find("query").find("results").find("rate#" + elem).find("Bid").text();
         result += `${elem}:${ask}:${bid }\n`;
       }
-    )
+    );
     
     $('#adwork').val(result);
-}
+};
