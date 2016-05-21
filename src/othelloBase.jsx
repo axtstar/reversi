@@ -271,24 +271,4 @@ export class othelloBase {
     }
     $(this.baseName).trigger('fire');
   }
-  
-  clear(){
-    $(this.cssBase).off('fire');
-    for (var x=0; x < this.rpt ; x++)
-    {
-       for (var y=0; y < this.rpt ; y++)
-       {
-//           $( () => {
-//             setInterval( () => {
-              this.context.fillStyle = "green";
-              this.context.fillRect(x * this.iwidth, y * this.iwidth ,this.iwidth,this.iwidth); 
-              this.context.strokeStyle = "rgb(0, 0, 0)";
-              this.context.strokeRect(x * this.iwidth, y * this.iwidth ,this.iwidth,this.iwidth); 
-//             },
-//             200,null);
-//           } );
-       }
-    }
-  }
-  
 }
