@@ -23,6 +23,9 @@ export class othelloBase {
   //initial
   // reset whole reversi cells to 0 and put 2 by 2 cells
   init(){
+     //event off
+     $(this.baseName).off('fire');
+     //remove all cells
      this.othellos.splice(0,this.othellos.length);
 
      this.addForce(this.rpt / 2 - 1,this.rpt / 2 - 1, 1);
@@ -63,7 +66,7 @@ export class othelloBase {
     return ret;
   }
   
-  //guide circle for helpness to which location is available
+  //guide circle for helpness for which location is available
   asistAll (c){
     var ret = 0;
     for(var x=0; x < this.rpt ; x++){
