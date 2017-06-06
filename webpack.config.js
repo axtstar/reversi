@@ -1,13 +1,14 @@
 // webpack.config.js
 module.exports = {
   entry: {
+      othelloBase: ['./src/othelloBase.jsx'],
+      othelloOne: ['./src/othelloOne.jsx'],
       reversi: ['./src/reversi.jsx'],
-      future: ['./src/future.jsx'],
-     unit: ['./test/unit.jsx']
+      future: ['./src/future.jsx']
   },
   output: {
     path: './lib/',
-    filename: '[name].js'
+    filename: 'bundle.js'
   },
   devtool: "source-map",
   module: {
