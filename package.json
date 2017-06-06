@@ -10,25 +10,28 @@
   "devDependencies": {
     "babel-cli": "^6.8.0",
     "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react":"*",
+    "babel-preset-react": "*",
     "babel-core": "*",
     "babel-polyfill": "*",
     "babel-preset-stage-0": "*",
     "babel-eslint": "*",
     "babel-plugin-transform-runtime": "*",
-    "webpack":"*",
-    "babel-loader":"*",
-    "connect":"*",
-    "serve-static":"*",
-    "chai":"*",
-    "jsdom":"*"
+    "webpack": "*",
+    "babel-loader": "*",
+    "connect": "*",
+    "serve-static": "*",
+    "chai": "*",
+    "jsdom": "*"
   },
   "eslintConfig": {
-  "env": 
-    {
+    "env": {
       "es6": true,
       "node": true,
       "browser": true,
-      "jquery" : true    }
+      "jquery": true
+    }
+  },
+  "dependencies": {
+    "electron": "^1.6.10"
   }
 }

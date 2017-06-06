@@ -8,7 +8,7 @@ describe('reversi test run', () => {
       // init
       var target = new othelloBase('#base',8);
       target.init();
-      target.clear();      
+      assert.equals(4,target.score);
     });
     it('run  instantiate and two step',  () => {
       // init

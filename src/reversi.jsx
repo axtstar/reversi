@@ -5,7 +5,7 @@ var cssScore='#score';
 var cssStart='#start';
 var cssTdebug='#tdebug';
 var cssCheck="input[name='c']";
-var comWait = 1;
+var comWait = 1000;
 
 $(() => {
   //マス目の数 
