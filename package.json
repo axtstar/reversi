@@ -2,9 +2,10 @@
   "name": "reversi",
   "version": "0.0.3",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "tsc && webpack",
     "eslint": "eslint src/*.jsx",
     "webpack": "webpack",
+    "electron":"electron main.js",
     "server": "node server.js"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     }
   },
   "dependencies": {
-    "electron": "^1.6.10"
+    "electron": "^1.6.10",
+    "typescript": "^2.3.4"
   }
 }
