@@ -1,11 +1,22 @@
-import {othelloOne} from "../src/othelloOne.jsx";
+import {othelloOne} from "./othelloOne";
 
 /////////////////////////////////////
 //オセロのマス目
 //base class
 /////////////////////////////////////
 export class othelloBase {
-  constructor(_cssBase,  _rpt){
+
+  public baseName:any
+  public rpt:any
+  public canvas:any
+  public iwidth:any
+  public context:any
+  public othellos:any
+  public yourColor:any
+  public comColor:any
+  public myTurn:any
+
+  constructor(_cssBase:any,  _rpt:any){
     this.baseName= _cssBase;
     this.rpt=_rpt;
     this.canvas=$(this.baseName).get(0);
@@ -37,7 +48,7 @@ export class othelloBase {
   }
   
   //put a cell among all posible location
-  addAll2One(c){
+  addAll2One(c:any){
     var ts = [];
     var index=0;
     
@@ -67,7 +78,7 @@ export class othelloBase {
   }
   
   //guide circle for helpness for which location is available
-  asistAll (c){
+  asistAll (c:any){
     var ret = 0;
     for(var x=0; x < this.rpt ; x++){
       for(var y=0; y < this.rpt ; y++){
@@ -82,7 +93,7 @@ export class othelloBase {
   }
   
   //check the available location
-  addTrialAll (c){
+  addTrialAll (c:any){
     var ret = 0;
     for(var x=0; x < this.rpt ; x++){
       for(var y=0; y < this.rpt ; y++){
@@ -94,7 +105,7 @@ export class othelloBase {
   }
   
   //culculate score
-  score(_sbt){
+  score(_sbt:any){
     var ret = 0;
     for(var i=0; i < this.othellos.length ; i++){
       var cell =  this.othellos[i];
@@ -106,7 +117,7 @@ export class othelloBase {
   }
   
   //force add a cell due to reset a game
-  addForce(_x,_y,_c){
+  addForce(_x:any,_y:any,_c:any){
     if (this.getOthelloC(_x, _y)==-1){
       var ox= new othelloOne(_x,_y,_c,this);
       this.setOthello(ox);
@@ -116,7 +127,7 @@ export class othelloBase {
   }
   
   //virtual trial put the cell
-  addTrial(_x,_y,_c){
+  addTrial(_x:any,_y:any,_c:any){
     var ret = 0;
     if (this.getOthelloC(_x, _y)==-1){
       var ox= new othelloOne(_x,_y,_c,this);
@@ -126,7 +137,7 @@ export class othelloBase {
   }
   
   //actual put the cell
-  add(_x,_y,_c){
+  add(_x:any,_y:any,_c:any){
     var ret = 0;
     if (this.getOthelloC(_x, _y)==-1){
       var ox= new othelloOne(_x,_y,_c,this);
@@ -138,11 +149,11 @@ export class othelloBase {
     }
     return ret;
   }
-  setOthello(_othello){
+  setOthello(_othello:any){
     this.othellos.push(_othello);
     return;
   }
-  getOthello(_x,_y){
+  getOthello(_x:any,_y:any){
     for (var i=0;i<this.othellos.length;i++){
       var e = this.othellos[i];
       if (e.posX == _x && e.posY==_y){
@@ -151,13 +162,13 @@ export class othelloBase {
     }
     return null;
   }
-  getOthelloC(_x,_y){
+  getOthelloC(_x:any,_y:any){
     if (this.getOthello(_x,_y)==null){
       return -1;
     }
     return this.getOthello(_x,_y).sbt; 
   }
-  doOthello(_othello,_trial){
+  doOthello(_othello:any,_trial:any){
     var ret = 0;
     ret += this.doOthelloDetail(_othello,0,_trial);
     ret += this.doOthelloDetail(_othello,1,_trial);
@@ -170,7 +181,7 @@ export class othelloBase {
     
     return ret;
   }
-  doOthelloBit(_x,_y,_dim,_num){
+  doOthelloBit(_x:any,_y:any,_dim:any,_num:any){
     switch(_num){
       case 0:
         _x[_dim]++;
@@ -203,7 +214,7 @@ export class othelloBase {
     }
     return;
   }
-  doOthelloDetail(_othello,_num,_trial){
+  doOthelloDetail(_othello:any,_num:any,_trial:any){
     var ret = 0;
     
     //

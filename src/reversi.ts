@@ -1,4 +1,4 @@
-import {othelloBase} from "../src/othelloBase.jsx";
+import {othelloBase} from "./othelloBase";
 
 var cssBase='#base';
 var cssScore='#score';
@@ -57,7 +57,7 @@ $(() => {
    });
 
    //タッチのイベントハンドラを登録
-   $(cssBase).on('touchstart', (e) => {
+   $(cssBase).on('touchstart', (e:any) => {
       var rect = e.target.getBoundingClientRect();
       var touch = e.originalEvent.touches[0];
      
@@ -68,7 +68,7 @@ $(() => {
    });
 });
 
-var setScore = (b) => {
+var setScore = (b:any) => {
   //得点
   var black=b.score(b.yourColor);
   var white=b.score(b.comColor); 
@@ -93,7 +93,7 @@ var setScore = (b) => {
   }
 };
 
-var setMyOthello = (b,x,y,c,comColor) => {
+var setMyOthello = (b:any,x:any,y:any,c:any,comColor:any) => {
       if (c!=(b.myTurn % 2)){
         return;
       }
@@ -111,7 +111,7 @@ var setMyOthello = (b,x,y,c,comColor) => {
 };
 
 //
-var setAOnce = (_base,_color) => {
+var setAOnce = (_base:any,_color:any) => {
   _base.myTurn++;
   var e = _base.addAll2One(_color % 2);
   if (e==0){

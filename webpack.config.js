@@ -1,9 +1,9 @@
 // webpack.config.js
 module.exports = {
   entry: {
-      othelloBase: ['./src/othelloBase.jsx'],
+      othelloBase: ['./lib/othelloBase.js'],
       othelloOne: ['./lib/othelloOne.js'],
-      reversi: ['./src/reversi.jsx'],
+      reversi: ['./lib/reversi.js'],
       future: ['./src/future.jsx']
   },
   output: {
