@@ -2,7 +2,7 @@
 module.exports = {
   entry: {
       othelloBase: ['./src/othelloBase.jsx'],
-      othelloOne: ['./src/othelloOne.jsx'],
+      othelloOne: ['./lib/othelloOne.js'],
       reversi: ['./src/reversi.jsx'],
       future: ['./src/future.jsx']
   },

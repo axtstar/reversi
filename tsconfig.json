@@ -4,7 +4,7 @@
         "target": "es5",
         "noImplicitAny": true,
         "noImplicitUseStrict":true, // use restrict or not
-        "outDir": "",
+        "outDir": "lib",
         "rootDir": "src",
         "sourceMap": true,
         "jsx": "react"
