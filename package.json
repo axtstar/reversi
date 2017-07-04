@@ -2,7 +2,7 @@
   "name": "reversi",
   "version": "0.0.3",
   "scripts": {
-    "build": "tsc && cp ./lib/main.js* ./ && webpack",
+    "build": "tsc && cp ./lib/main.js* ./ && webpack && mv bundle.* ./lib/",
     "eslint": "eslint src/*.jsx",
     "webpack": "webpack",
     "electron": "electron main.js",
